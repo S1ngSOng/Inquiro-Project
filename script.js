@@ -83,10 +83,10 @@ fetch('data.json')
             if (index === 0){
                 tabButton.classList.replace('bg-slate-300', 'bg-slate-500');
                 tabContent.innerHTML = section.content;
-                tabContent.classList.remove('hidden');
+                tabContent.classList.replace('hidden', 'block');
 
                 accordionHeader.classList.replace('bg-slate-300', 'bg-slate-500');
-                accordionContent.classList.remove('hidden');
+                accordionContent.classList.replace('hidden', 'block');
             }
 
             tabHeader.appendChild(tabButton);
