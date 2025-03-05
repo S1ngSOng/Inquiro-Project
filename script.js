@@ -51,7 +51,6 @@ fetch('data.json')
                 element.addEventListener('click', () => {
                     // Close accordion if it is opened
                     if(accordionHeader.classList.contains('bg-slate-500')){
-                        //Click to unselect
                         accordionHeader.classList.replace('bg-slate-500', 'bg-slate-300');
                         toggleIcon.classList.replace('bg-[url(./images/up-arrow.png)]', 'bg-[url(./images/down-arrow.png)]');
                         accordionContent.classList.add('hidden');
@@ -66,9 +65,10 @@ fetch('data.json')
 
                         // Selecting an accordion
                         document.querySelectorAll('#accordionHeader').forEach(header => {
-                            header.classList.replace('bg-slate-500', 'bg-slate-300'); /*Add replacing arrow heads*/});
+                            header.classList.replace('bg-slate-500', 'bg-slate-300'); 
+                            header.querySelector('#toggleIcon').classList.replace('bg-[url(./images/up-arrow.png)]', 'bg-[url(./images/down-arrow.png)]');
+                        });
                         document.querySelectorAll('#accordionContent').forEach(content => content.classList.replace('block', 'hidden'));
-                        document.querySelectorAll('#toggleIcon').forEach(icon => icon.classList.replace('bg-[url(./images/up-arrow.png)]', 'bg-[url(./images/down-arrow.png)]'));
     
                         accordionHeader.classList.replace('bg-slate-300', 'bg-slate-500');
                         accordionContent.classList.replace('hidden', 'block');
