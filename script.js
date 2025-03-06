@@ -3,8 +3,10 @@ fetch('data.json')
     .then(data => {
         const container = document.getElementById('container');
 
+        const noOfItems = Object.keys(data).length;
+
         const baseLayout = document.createElement('div');
-        baseLayout.className = 'border-b border-slate-500 md:grid md:grid-cols-4 md:grid-rows-[2rem, 4rem] md:auto-rows-min'
+        baseLayout.className = 'border-b border-slate-500 md:grid md:grid-cols-(noOfItems) md:grid-rows-[2rem, 4rem] md:auto-rows-min'
         baseLayout.id = 'base';
 
         data.forEach((section, index) => {
@@ -15,7 +17,8 @@ fetch('data.json')
             header.id = 'header';
 
             const content = document.createElement('div');
-            content.className = 'p-2.5 bg-slate-200 hidden md:p-5 md:border md:border-slate-500 md:border-t-0 md:row-start-2 md:col-span-4';
+            // NOTE: 'md:col-span-(noOfItems)' is not working, however it is meant to adapt to the number of items in the data.json file
+            content.className = 'p-2.5 bg-slate-200 hidden md:p-5 md:border md:border-slate-500 md:border-t-0 md:col-span-4 md:row-start-2 ';
             content.innerHTML = section.content;
             content.id = 'content';
 
@@ -30,14 +33,17 @@ fetch('data.json')
                 if(window.innerWidth < 768 && header.classList.contains('bg-slate-500')){
                     header.classList.replace('bg-slate-500', 'bg-slate-300');
                     toggleIcon.classList.replace('bg-[url(./images/up-arrow.png)]', 'bg-[url(./images/down-arrow.png)]');
-                    content.classList.add('hidden')
+                    content.classList.add('max-md:hidden');
                 }
                 else{
                     document.querySelectorAll('#header').forEach(header => {
                         header.classList.replace('bg-slate-500', 'bg-slate-300');
                         header.querySelector('#toggleIcon').classList.replace('bg-[url(./images/up-arrow.png)]', 'bg-[url(./images/down-arrow.png)]');
                     });
-                    document.querySelectorAll('#content').forEach(content => content.classList.replace('block', 'hidden'));
+                    document.querySelectorAll('#content').forEach(content => {
+                        content.classList.replace('block', 'hidden');
+                        content.classList.remove('max-md:hidden');
+                    });
 
                     header.classList.replace('bg-slate-300', 'bg-slate-500');
                     content.classList.replace('hidden', 'block');
