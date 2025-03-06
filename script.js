@@ -25,10 +25,10 @@ fetch('data.json')
             header.appendChild(toggleIcon);
 
             header.addEventListener('click', () => {
-                if (header.classList.contains('bg-slate-500')){
+                if(window.innerWidth < 768 && header.classList.contains('bg-slate-500')){
                     header.classList.replace('bg-slate-500', 'bg-slate-300');
                     toggleIcon.classList.replace('bg-[url(./images/up-arrow.png)]', 'bg-[url(./images/down-arrow.png)]');
-                    content.classList.add('max-md:hidden')
+                    content.classList.add('hidden')
                 }
                 else{
                     document.querySelectorAll('#header').forEach(header => {
@@ -39,8 +39,9 @@ fetch('data.json')
 
                     header.classList.replace('bg-slate-300', 'bg-slate-500');
                     content.classList.replace('hidden', 'block');
-                    toggleIcon.classList.replace('bg-[url(./images/down-arrow.png)]', 'bg-[url(./images/up-arrow.png)]')
+                    toggleIcon.classList.replace('bg-[url(./images/down-arrow.png)]', 'bg-[url(./images/up-arrow.png)]');
                 }
+                
             });
 
             if(index === 0){
