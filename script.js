@@ -3,9 +3,9 @@ fetch('data.json')
     .then(data => {
         const container = document.getElementById('container');
 
-        const grouper = document.createElement('div');
-        grouper.className = 'border-b border-slate-500 md:grid md:grid-cols-4 md:grid-rows-[2rem, 4rem] md:auto-rows-min'
-        grouper.id = 'grouper';
+        const baseLayout = document.createElement('div');
+        baseLayout.className = 'border-b border-slate-500 md:grid md:grid-cols-4 md:grid-rows-[2rem, 4rem] md:auto-rows-min'
+        baseLayout.id = 'base';
 
         data.forEach((section, index) => {
             
@@ -25,6 +25,8 @@ fetch('data.json')
             header.appendChild(toggleIcon);
 
             header.addEventListener('click', () => {
+
+                //Checks if webapp is in the mobile interface and if user is clicking an opened accordion.
                 if(window.innerWidth < 768 && header.classList.contains('bg-slate-500')){
                     header.classList.replace('bg-slate-500', 'bg-slate-300');
                     toggleIcon.classList.replace('bg-[url(./images/up-arrow.png)]', 'bg-[url(./images/down-arrow.png)]');
@@ -50,11 +52,11 @@ fetch('data.json')
                 toggleIcon.classList.replace('bg-[url(./images/down-arrow.png)]', 'bg-[url(./images/up-arrow.png)]');
             }
 
-            grouper.appendChild(header);
-            grouper.appendChild(content);
+            baseLayout.appendChild(header);
+            baseLayout.appendChild(content);
         });
 
-        container.appendChild(grouper);
+        container.appendChild(baseLayout);
 
     })
     .catch(error => console.error('Error loading data: ', error));
